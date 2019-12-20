@@ -20,6 +20,6 @@ def generate_unique_name(filename: str) -> str :
     if isinstance(filename, str):
         unique_id = str(uuid4().int)[:5]
         extension: str = filename.split('.')[1]
-        return 'loftly_image' + unique_id + extension
+        return 'loftly_image' + unique_id + '.' + extension
     elif not isinstance(filename, str):
         raise Exception('filename should be a string!')

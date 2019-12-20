@@ -14,7 +14,7 @@ app = FastAPI()
 async def create_upload_files(files: List[UploadFile] = File(...)):
     try:
         [filename_validation(file.filename) for file in files]
-        return JSONResponse(status_code=HTTP_200_OK, content={"filenames": [file.filename for file in files]})
+        return JSONResponse(status_code=HTTP_200_OK, content={"filenames": [generate_unique_name(file.filename) for file in files]})
     except Exception as e:
         print(e)
         return PlainTextResponse(status_code=HTTP_500_INTERNAL_SERVER_ERROR, content=str(e))
