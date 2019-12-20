@@ -6,17 +6,6 @@ from typing import List, Union, Dict
 
 BUCKET_NAME: str = 'testbucketimgloftly'
 s3_client = boto3.client('s3')
-VALID_EXTENSIONS: Dict[str, bool] = { '.png': True, '.jpeg': True, '.pdf' : True, '.webp': True }
-
-def filename_validation(filenameinput: Union[str, List[str]]):
-    ''' Validates file types for lists of filenames and single file'''
-    if isinstance(filenameinput, str):
-        if filenameinput not in VALID_EXTENSIONS:
-            raise Exception('This file contains an invalid file type.')
-    elif isinstance(filenameinput, list):
-        for name in filenameinput:
-            if name not in VALID_EXTENSIONS:
-                raise Exception('This list contains a file with an invalid file type.')
 
 def handle_file_upload(file: UploadFile):
     ''' Uploads unvalidated files to S3 (use validation beforehand!)'''
