@@ -2,13 +2,14 @@ from typing import (List, Union, Dict)
 from uuid import uuid4
 
 VALID_EXTENSIONS: Dict[str, bool] = {
-    '.png': True, '.jpeg': True, '.pdf': True, '.webp': True}
+    'png': True, 'jpeg': True, 'pdf': True, 'webp': True, 'jpg': True}
 
 
 def filename_validation(filename: str) -> None:
     ''' Validates file types for lists of filenames and single file'''
     if isinstance(filename, str):
         extension: str = filename.split('.')[1]
+        print(extension)
         if extension not in VALID_EXTENSIONS:
             raise Exception('This file contains an invalid file type.')
     elif not isinstance(filename, str):

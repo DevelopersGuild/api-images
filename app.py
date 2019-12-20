@@ -1,8 +1,8 @@
 from typing import List
-from fastapi import FastAPI, File, UploadFile
-from starlette.responses import HTMLResponse, RedirectResponse, PlainTextResponse
-from starlette.status import HTTP_500_INTERNAL_SERVER_ERROR
-from utilities import generate_unique_name, filename_validation
+from fastapi import (FastAPI, File, UploadFile)
+from starlette.responses import (HTMLResponse, RedirectResponse, PlainTextResponse, JSONResponse)
+from starlette.status import (HTTP_500_INTERNAL_SERVER_ERROR, HTTP_200_OK)
+from utilities import (generate_unique_name, filename_validation)
 
 app = FastAPI()
 
@@ -13,8 +13,7 @@ app = FastAPI()
 async def create_upload_files(files: List[UploadFile] = File(...)):
     try:
         [filename_validation(file.filename) for file in files]
-        print({"filenames": [file.filename for file in files]})
-        return 'done'
+        return JSONResponse(status_code=HTTP_200_OK, content={"filenames": [file.filename for file in files]})
     except Exception as e:
         print(e)
         return PlainTextResponse(status_code=HTTP_500_INTERNAL_SERVER_ERROR,content=str(e))
@@ -25,8 +24,7 @@ async def create_upload_files(files: List[UploadFile] = File(...)):
 async def create_upload_file(file: UploadFile = File(...)):
     try:
         filename_validation(file.filename)
-        print({"filename": file.filename })
-        return 'done'
+        return JSONResponse(status_code=HTTP_200_OK, content={"filename": file.filename })
     except Exception as e:
         print(e)
         return PlainTextResponse(status_code=HTTP_500_INTERNAL_SERVER_ERROR,content=str(e))
