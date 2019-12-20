@@ -9,7 +9,6 @@ def filename_validation(filename: str) -> None:
     ''' Validates file types for lists of filenames and single file'''
     if isinstance(filename, str):
         extension: str = filename.split('.')[1]
-        print(extension)
         if extension not in VALID_EXTENSIONS:
             raise Exception('This file contains an invalid file type.')
     elif not isinstance(filename, str):
