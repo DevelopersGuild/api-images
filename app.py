@@ -11,20 +11,24 @@ app = FastAPI()
 @app.post("/uploadfiles/")
 async def create_upload_files(files: List[UploadFile] = File(...)):
     try:
+        [filename_validation(file.filename) for file in files]
         print({"filenames": [file.filename for file in files]})
         return 'done'
     except Exception as e:
         print(e)
+        return str(e)
         
 
 # Single File Upload (FastAPI UploadFile)
 @app.post("/uploadfile/")
 async def create_upload_file(file: UploadFile = File(...)):
     try:
+        filename_validation(file.filename)
         print({"filename": file.filename })
         return 'done'
     except Exception as e:
         print(e)
+        return str(e)
 
 
 # For Testing the endpoints
