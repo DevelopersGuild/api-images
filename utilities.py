@@ -5,7 +5,7 @@ VALID_EXTENSIONS: Dict[str, bool] = {
     '.png': True, '.jpeg': True, '.pdf': True, '.webp': True}
 
 
-def filename_validation(filename: str):
+def filename_validation(filename: str) -> None:
     ''' Validates file types for lists of filenames and single file'''
     if isinstance(filename, str):
         extension: str = filename.split('.')[1]
