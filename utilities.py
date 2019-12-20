@@ -18,8 +18,8 @@ def filename_validation(filename: str) -> None:
 def generate_unique_name(filename: str) -> str:
     ''' Generates Unique name for Image Files '''
     if isinstance(filename, str):
-        unique_id = str(uuid4().int)[:5]
         extension: str = filename.split('.')[1]
-        return unique_id + '-' + 'loftly-image' + '-' + unique_id + '.' + extension
+        unique_name = ''.join([str(uuid4().int)[:5] for i in range(6)])
+        return unique_name + '.' + extension
     elif not isinstance(filename, str):
         raise Exception('filename should be a string!')
